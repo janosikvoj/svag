@@ -113,13 +113,13 @@ const Grid: React.FC<GridProps> = ({ width, height, strokeWidth = 0.5 }) => {
         <rect
           width={width}
           height={height}
-          rx={8 * inverseScale}
+          rx={16 * inverseScale}
           strokeWidth={strokeWidth * 2}
           vectorEffect="non-scaling-stroke"
           className="fill-none stroke-border"
         />
         <g // X coordinate numbers
-          transform={`translate(0 ${-8 * inverseScale})`}
+          transform={`translate(0 ${12 * inverseScale})`}
         >
           {/* <text
             className="font-mono text-muted-foreground"
@@ -137,6 +137,7 @@ const Grid: React.FC<GridProps> = ({ width, height, strokeWidth = 0.5 }) => {
                   fontSize={scaledFontSize}
                   x={i + 1}
                   textAnchor="middle"
+                  alignmentBaseline="central"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -156,7 +157,7 @@ const Grid: React.FC<GridProps> = ({ width, height, strokeWidth = 0.5 }) => {
           </text> */}
         </g>
         <g // Y coordinate numbers
-          transform={`translate(${-8 * inverseScale} 0)`}
+          transform={`translate(${8 * inverseScale} 0)`}
         >
           {/* <text
             className="font-mono text-muted-foreground"
@@ -174,7 +175,7 @@ const Grid: React.FC<GridProps> = ({ width, height, strokeWidth = 0.5 }) => {
                   className="font-mono text-muted-foreground transition-all"
                   fontSize={scaledFontSize}
                   y={i + 1}
-                  textAnchor="end"
+                  textAnchor="start"
                   alignmentBaseline="central"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

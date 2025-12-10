@@ -1,4 +1,4 @@
-import { useSVGScale } from './SVGScaleContext/useSVGScale';
+import { useSVGScale } from './SVGDisplay/SVGScaleContext/useSVGScale';
 
 interface PointProps {
   x?: number;

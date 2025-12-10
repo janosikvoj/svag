@@ -3,7 +3,7 @@ import { Github } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="p-3 mt-6 pb-12 text-primary-foreground bg-primary">
+    <footer className="p-3 mt-24 pb-12 text-primary-foreground bg-primary">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <h2 className="font-pixel text-3xl font-black leading-[1em]">SVaG</h2>

@@ -9,6 +9,9 @@
   --font-sans: 'DM Sans', sans-serif;
   --font-pixel: 'VT323', monospace;
   --font-scribble: 'Redacted Script', cursive;
+
+  --color-*: initial;
+  --color-white: #fff;
 }
 
 @theme inline {
