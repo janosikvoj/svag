@@ -1,6 +1,6 @@
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useId } from 'react';
-import { useSVGScale } from './SVGScaleContext/useSVGScale';
+import { useSVGDisplay } from './SVGDisplayContext/useSVGDisplay';
 
 interface GridProps {
   width: number;
@@ -12,12 +12,14 @@ const Grid: React.FC<GridProps> = ({ width, height, strokeWidth = 0.5 }) => {
   const uniqueId = useId();
   const xClipId = `cut-x-grid-lines-${uniqueId}`;
   const yClipId = `cut-y-grid-lines-${uniqueId}`;
-  const { scaleFactor } = useSVGScale();
+  const { scaleFactor, showDetail, showGrid } = useSVGDisplay();
 
   // Calculate inverse scale for text
   const inverseScale = 1 / scaleFactor;
+
   // Base font size in viewBox units (you can adjust this)
   const baseFontSize = 14;
+
   // Scaled font size to match rem-like behavior
   const scaledFontSize = baseFontSize * inverseScale;
 
@@ -105,98 +107,66 @@ const Grid: React.FC<GridProps> = ({ width, height, strokeWidth = 0.5 }) => {
           />
         ))}
       </g>
-      <motion.g
-        initial={{ opacity: 0, filter: 'blur(1px)' }}
-        animate={{ opacity: 1, filter: 'blur(0px)' }}
-        exit={{ opacity: 0, filter: 'blur(1px)', transition: { delay: 0.8 } }}
-      >
-        <rect
-          width={width}
-          height={height}
-          rx={16 * inverseScale}
-          strokeWidth={strokeWidth * 2}
-          vectorEffect="non-scaling-stroke"
-          className="fill-none stroke-border"
-        />
-        <g // X coordinate numbers
-          transform={`translate(0 ${12 * inverseScale})`}
-        >
-          {/* <text
-            className="font-mono text-muted-foreground"
-            fontSize={scaledFontSize}
-            textAnchor="middle"
+      <AnimatePresence>
+        {showDetail && showGrid && (
+          <motion.g
+            initial={{ opacity: 0, filter: 'blur(1px)' }}
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
+            exit={{
+              opacity: 0,
+              filter: 'blur(1px)',
+              transition: { delay: 0.8 },
+            }}
           >
-            0
-          </text> */}
-          {Array.from({ length: width - 1 }).map((_, i) => {
-            if ((i + 1) % 5 === 0)
-              return (
-                <motion.text
-                  key={i}
-                  className="font-mono text-muted-foreground transition-all"
-                  fontSize={scaledFontSize}
-                  x={i + 1}
-                  textAnchor="middle"
-                  alignmentBaseline="central"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: i * (4 / 1000) }}
-                >
-                  {i + 1}
-                </motion.text>
-              );
-          })}
-          {/* <text
-            className="font-mono text-muted-foreground"
-            fontSize={3}
-            x={width}
-            textAnchor="middle"
-          >
-            {width}
-          </text> */}
-        </g>
-        <g // Y coordinate numbers
-          transform={`translate(${8 * inverseScale} 0)`}
-        >
-          {/* <text
-            className="font-mono text-muted-foreground"
-            fontSize={3}
-            textAnchor="end"
-            alignmentBaseline="central"
-          >
-            0
-          </text> */}
-          {Array.from({ length: height - 1 }).map((_, i) => {
-            if ((i + 1) % 5 === 0)
-              return (
-                <motion.text
-                  key={i}
-                  className="font-mono text-muted-foreground transition-all"
-                  fontSize={scaledFontSize}
-                  y={i + 1}
-                  textAnchor="start"
-                  alignmentBaseline="central"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: i * (4 / 1000) }}
-                >
-                  {i + 1}
-                </motion.text>
-              );
-          })}
-          {/* <text
-            className="font-mono text-muted-foreground"
-            fontSize={3}
-            y={height}
-            textAnchor="end"
-            alignmentBaseline="central"
-          >
-            {height}
-          </text> */}
-        </g>
-      </motion.g>
+            <g // X coordinate numbers
+              transform={`translate(0 ${12 * inverseScale})`}
+            >
+              {Array.from({ length: width - 1 }).map((_, i) => {
+                if ((i + 1) % 5 === 0)
+                  return (
+                    <motion.text
+                      key={i}
+                      className="font-mono fill-muted-foreground transition-all"
+                      fontSize={scaledFontSize}
+                      x={i + 1}
+                      textAnchor="middle"
+                      alignmentBaseline="central"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: i * (4 / 1000) }}
+                    >
+                      {i + 1}
+                    </motion.text>
+                  );
+              })}
+            </g>
+            <g // Y coordinate numbers
+              transform={`translate(${8 * inverseScale} 0)`}
+            >
+              {Array.from({ length: height - 1 }).map((_, i) => {
+                if ((i + 1) % 5 === 0)
+                  return (
+                    <motion.text
+                      key={i}
+                      className="font-mono fill-muted-foreground transition-all"
+                      fontSize={scaledFontSize}
+                      y={i + 1}
+                      textAnchor="start"
+                      alignmentBaseline="central"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: i * (4 / 1000) }}
+                    >
+                      {i + 1}
+                    </motion.text>
+                  );
+              })}
+            </g>
+          </motion.g>
+        )}
+      </AnimatePresence>
     </>
   );
 };

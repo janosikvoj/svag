@@ -2,7 +2,7 @@ import SVGDisplay from '@/components/svg/SVGDisplay';
 import { motion, useSpring, useTransform } from 'motion/react';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import Polygon from '@/components/svg/Polygon';
+import Polygon from '@/components/svg/SmartPolygon';
 import Section from '../Section';
 
 const SPRING_OPTIONS = { bounce: 0.05, visualDuration: 0.2 };

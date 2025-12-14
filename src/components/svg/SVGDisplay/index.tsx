@@ -1,18 +1,21 @@
 import Grid from './Grid';
 import { Toggle } from '../../ui/toggle';
-import { GridIcon } from 'lucide-react';
+import { EyeIcon, GridIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence } from 'motion/react';
-import { SVGScaleContext } from './SVGScaleContext';
+import { motion, AnimatePresence } from 'motion/react';
+import { SVGDisplayContext } from './SVGDisplayContext';
 import { cn } from '@/lib/utils';
 
-interface SVGDisplayProps {
+interface SVGDisplayProps
+  extends Omit<
+    React.ComponentProps<typeof motion.svg>,
+    'width' | 'height' | 'children'
+  > {
   width?: number;
   height?: number;
-  className?: string;
-  children?: React.ReactNode;
-  controlPanel?: boolean | React.ReactNode;
-  figcaption?: React.ReactNode;
+  children: React.ReactNode;
+  defaultShowGrid?: boolean;
+  defaultShowDetail?: boolean;
 }
 
 const SVGDisplay: React.FC<SVGDisplayProps> = ({
@@ -20,10 +23,14 @@ const SVGDisplay: React.FC<SVGDisplayProps> = ({
   height = 100,
   className,
   children,
-  controlPanel = true,
-  figcaption,
+
+  defaultShowGrid = false,
+  defaultShowDetail = true,
+
+  ...props
 }) => {
-  const [showGrid, setShowGrid] = useState(false);
+  const [showGrid, setShowGrid] = useState(defaultShowGrid);
+  const [showDetail, setShowDetail] = useState(defaultShowDetail);
   const [scaleFactor, setScaleFactor] = useState(1);
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -44,47 +51,43 @@ const SVGDisplay: React.FC<SVGDisplayProps> = ({
     return () => observer.disconnect();
   }, [width]);
 
-  const ControlPanel = () => {
-    if (controlPanel)
-      return (
-        <div className="absolute right-0 bottom-0 flex flex-col items-end gap-6 p-2">
-          {controlPanel}
-          <Toggle
-            variant="outline"
-            defaultPressed={showGrid}
-            onPressedChange={(pressed) => {
-              setShowGrid(pressed);
-            }}
-            aria-label="Toggle italic"
-          >
-            <GridIcon />
-            Grid
-          </Toggle>
-        </div>
-      );
-  };
-
   return (
-    <figure className={cn('flex flex-col gap-1.5', className)}>
-      <div className="relative">
-        <SVGScaleContext.Provider value={{ scaleFactor, svgRef }}>
-          <svg
-            ref={svgRef}
-            className="overflow-visible"
-            viewBox={`0 0 ${width} ${height}`}
-            fill="currentColor"
-          >
-            <AnimatePresence>
-              {showGrid && <Grid width={width} height={height} />}
-            </AnimatePresence>
-            {children}
-          </svg>
-        </SVGScaleContext.Provider>
-        <ControlPanel />
+    <figure className={cn('relative', className)}>
+      <SVGDisplayContext.Provider
+        value={{ scaleFactor, svgRef, showDetail, showGrid }}
+      >
+        <motion.svg ref={svgRef} viewBox={`0 0 ${width} ${height}`} {...props}>
+          <AnimatePresence>
+            {showGrid && <Grid width={width} height={height} />}
+          </AnimatePresence>
+          {children}
+        </motion.svg>
+      </SVGDisplayContext.Provider>
+
+      <div className="absolute right-0 bottom-0 flex flex-row items-end gap-2 p-2">
+        <Toggle
+          size="sm"
+          variant="outline"
+          defaultPressed={showDetail}
+          onPressedChange={(pressed) => {
+            setShowDetail(pressed);
+          }}
+          aria-label="Toggle italic"
+        >
+          <EyeIcon />
+        </Toggle>
+        <Toggle
+          size="sm"
+          variant="outline"
+          defaultPressed={showGrid}
+          onPressedChange={(pressed) => {
+            setShowGrid(pressed);
+          }}
+          aria-label="Toggle italic"
+        >
+          <GridIcon />
+        </Toggle>
       </div>
-      {figcaption && (
-        <figcaption className="text-sm px-3">{figcaption}</figcaption>
-      )}
     </figure>
   );
 };

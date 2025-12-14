@@ -9,7 +9,12 @@ import Section from './components/sections/Section';
 import Exploration1 from './components/sections/explorations/Exploration1';
 import Exploration2 from './components/sections/explorations/Exploration2';
 import Exploration3 from './components/sections/explorations/Exploration3';
-import DisplacementExample from './components/examples/DisplacementExample';
+import ViewBoxExample from './components/examples/ViewBoxExample';
+import PrimitivesExample from './components/examples/PrimitivesExample';
+import { Separator } from './components/ui/separator';
+import DistortionExample from './components/examples/DistortionExample';
+import PathExample from './components/examples/PathExample';
+import GroupExample from './components/examples/GroupExample';
 
 function App() {
   const lenisRef = useRef<LenisRef>(null);
@@ -28,21 +33,23 @@ function App() {
   return (
     <>
       <Header />
-      <main className="px-3">
+      <main className="px-3 max-w-7xl mx-auto">
         <HeroSection />
         <Section
-          title="Building Blocks"
-          description="SVG primitives form the basis of all vector graphics. These fundamental shapes combine to create complex visualizations."
+          title="The Foundation"
+          description="Break free from the pixel grid. In the world of vector graphics, every element is defined by mathematics rather than a static map of colored squares. This means your designs are resolution-independent, endlessly editable, and lightweight."
         >
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-background h-6">svg</div>
-            <div className="bg-background h-6">panel</div>
-          </div>
+          <ViewBoxExample />
+          <Separator />
+          <PrimitivesExample />
+          <Separator />
+          <PathExample />
+          <GroupExample />
         </Section>
 
         <Section
           title="Motion & Style"
-          description="SVG elements respond to CSS and JavaScript, enabling smooth transitions and dynamic interactions."
+          description="Static interfaces are a thing of the past. Scalable Vector Graphics were born to move. Because every coordinate is code, we can animate, morph, and evolve shapes with silky smooth 60fps performance."
         >
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-background h-6">svg</div>
@@ -52,14 +59,14 @@ function App() {
 
         <Section
           title="Filter Effects Playground"
-          description="SVG filters unlock powerful visual effects. Adjust parameters in real-time to understand how each filter works."
+          description="Unlock Photoshop-grade effects directly in the browser. SVG Filters allow for non-destructive, resolution-independent post-processing. From organic textures to liquid distortion, these effects are generated mathematically on the fly, keeping your file sizes tiny."
         >
-          <DisplacementExample />
+          <DistortionExample />
         </Section>
 
         <Section
-          title="Practical Use Cases"
-          description="See how these techniques apply to production design."
+          title="In Production"
+          description="Theory is useful, but application is vital. Why do modern product teams choose SVG over PNG or JPG? It comes down to flexibility. A single SVG asset can adapt to dark mode, different screen sizes, and user interactions without ever needing to export a new file."
         >
           <div className="grid grid-cols-2 gap-3">
             <Card>
@@ -68,11 +75,11 @@ function App() {
             <div className="bg-background h-6">panel</div>
           </div>
         </Section>
-      </main>
 
-      <Exploration1 />
-      <Exploration2 />
-      <Exploration3 />
+        <Exploration1 />
+        <Exploration2 />
+        <Exploration3 />
+      </main>
 
       <Footer />
       <ReactLenis

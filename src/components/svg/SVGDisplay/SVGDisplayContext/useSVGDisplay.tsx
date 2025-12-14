@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { SVGScaleContext } from '.';
+import { SVGDisplayContext } from '.';
 
-export const useSVGScale = () => {
-  const context = useContext(SVGScaleContext);
+export const useSVGDisplay = () => {
+  const context = useContext(SVGDisplayContext);
   if (context === undefined) {
     throw new Error('useSVGScale must be used within SVGScaleProvider');
   }

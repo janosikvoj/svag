@@ -1,6 +1,6 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
 import { motion } from 'motion/react';
-import Point from '@/components/svg/Point';
+import Point from '@/components/svg/PointMarker';
 import Section from '../Section';
 
 const Exploration1 = () => {

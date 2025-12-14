@@ -10,13 +10,10 @@ type SectionProps = {
 const Section: React.FC<SectionProps> = ({ children, title, description }) => {
   const sectionId = title ? slugify(title) : undefined;
   return (
-    <section className="mt-18 bg-muted p-3 py-6">
-      <hgroup
-        className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3"
-        id={sectionId}
-      >
+    <section className="mt-18 bg-muted p-3 py-6 space-y-6">
+      <hgroup id={sectionId}>
         <a href={`#${sectionId}`} className="size-fit">
-          <h2 className="w-fit font-pixel text-6xl leading-[0.8]">
+          <h2 className="w-fit font-pixel text-6xl leading-[0.8] mb-3">
             {title.split(' ')[0]}
             <span className="w-fit font-sans font-medium text-5xl">
               {' '}
@@ -24,7 +21,7 @@ const Section: React.FC<SectionProps> = ({ children, title, description }) => {
             </span>
           </h2>
         </a>
-        {description && <p className="max-w-xs text-pretty">{description}</p>}
+        {description && <p className="max-w-lg text-balance">{description}</p>}
       </hgroup>
       {children}
     </section>
