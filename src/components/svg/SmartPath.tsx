@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion, useTransform } from 'motion/react';
 import type { MotionPoint } from './types';
-import SmartPointMarker from './SmartPointMarker';
 import PointMarker from './PointMarker';
 
 interface SmartPathProps extends React.ComponentProps<typeof motion.path> {
@@ -40,7 +39,6 @@ const SmartPath: React.FC<SmartPathProps> = ({
       {showSkeleton && (
         <motion.g
           className="stroke-muted-foreground/50"
-          strokeWidth="1"
           strokeDasharray="10 10"
         >
           <motion.line
@@ -67,8 +65,8 @@ const SmartPath: React.FC<SmartPathProps> = ({
 
       {showSkeleton && (
         <>
-          <SmartPointMarker x={controlPoint1.x} y={controlPoint1.y} />
-          <SmartPointMarker x={controlPoint2.x} y={controlPoint2.y} />
+          <PointMarker x={controlPoint1.x} y={controlPoint1.y} />
+          <PointMarker x={controlPoint2.x} y={controlPoint2.y} />
         </>
       )}
     </>

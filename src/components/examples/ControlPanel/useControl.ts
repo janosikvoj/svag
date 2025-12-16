@@ -1,5 +1,4 @@
 import { useSpring, useTransform } from 'motion/react';
-import { SPRING_OPTIONS } from '../config';
 
 interface ControlConfig {
   min: number;
@@ -7,6 +6,8 @@ interface ControlConfig {
   initial: number;
   step?: number;
 }
+
+const SPRING_OPTIONS = { bounce: 0.05, visualDuration: 0.2 };
 
 export function useControl(config: ControlConfig) {
   const step = config.step ?? 1;

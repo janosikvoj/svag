@@ -63,6 +63,11 @@ const ViewBoxExample = () => {
         <Control label="View Box Height" control={viewBoxHeight} />
 
         <div className="flex gap-3 items-center">
+          <Switch
+            id="overflow-mode"
+            checked={overflowVisible}
+            onCheckedChange={setOverflowVisible}
+          />
           <Label
             htmlFor="overflow-mode"
             className="flex gap-3 items-baseline grow"
@@ -72,11 +77,6 @@ const ViewBoxExample = () => {
               {overflowVisible ? 'visible' : 'hidden'}
             </motion.span>
           </Label>
-          <Switch
-            id="overflow-mode"
-            checked={overflowVisible}
-            onCheckedChange={setOverflowVisible}
-          />
         </div>
       </ControlPanel>
     </div>

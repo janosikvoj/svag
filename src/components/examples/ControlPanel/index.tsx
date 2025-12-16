@@ -1,4 +1,5 @@
 import { Item, ItemActions, ItemHeader } from '@/components/ui/item';
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 interface ControlPanelProps {
@@ -15,7 +16,7 @@ export const ControlPanel = ({
   className,
 }: ControlPanelProps) => {
   return (
-    <div className={className}>
+    <div className={cn('max-w-md', className)}>
       <h3 className="font-mono font-medium text-xl">{title}</h3>
       <p className="text-muted-foreground text-balance mt-3">{description}</p>
 

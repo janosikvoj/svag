@@ -1,5 +1,6 @@
 import React from 'react';
-import { motion, MotionValue, useTransform } from 'motion/react';
+import { motion, MotionValue } from 'motion/react';
+import PointMarker from './PointMarker';
 
 interface FaceGroupProps {
   groupRotate: MotionValue<number>;
@@ -13,51 +14,52 @@ const FaceGroup: React.FC<FaceGroupProps> = ({
   eyeSpacing,
 }) => {
   const center = 50;
-  const eyeY = 40;
-
-  const leftEyeX = useTransform(eyeSpacing, (s) => -s);
-  const rightEyeX = eyeSpacing; // Positive value is fine directly
 
   return (
-    <motion.g
-      style={{
-        rotate: groupRotate,
-        scale: groupScale,
-        originX: '50px',
-        originY: '50px',
-      }}
-    >
-      <motion.circle
-        cx={center}
-        cy={center}
-        r={40}
-        className="fill-primary/20 stroke-primary stroke-2"
-      />
+    <>
+      <motion.g
+        style={{
+          rotate: groupRotate,
+          scale: groupScale,
+        }}
+      >
+        {/* Head */}
+        <motion.circle
+          cx={center}
+          cy={center}
+          r={40}
+          vectorEffect="non-scaling-stroke"
+          className="fill-primary/20 stroke-primary stroke-4"
+        />
 
-      {/* Left Eye */}
-      <motion.circle
-        cx={50}
-        cy={eyeY}
-        r={5}
-        className="fill-primary"
-        style={{ x: leftEyeX }} // Apply transform here
-      />
+        {/* Left Eye */}
+        <motion.circle
+          cx={50}
+          cy={40}
+          r={5}
+          className="fill-primary"
+          style={{ x: eyeSpacing }} // Apply transform here
+        />
 
-      {/* Right Eye */}
-      <motion.circle
-        cx={50}
-        cy={eyeY}
-        r={5}
-        className="fill-primary"
-        style={{ x: rightEyeX }}
-      />
+        {/* Right Eye */}
+        <motion.circle
+          cx={50}
+          cy={40}
+          r={5}
+          className="fill-primary rotate-180"
+          style={{ x: eyeSpacing }}
+        />
 
-      <motion.path
-        d="M 35 65 Q 50 75 65 65"
-        className="stroke-primary stroke-2 fill-none"
-        strokeLinecap="round"
-      />
-    </motion.g>
+        {/* Mouth */}
+        <motion.path
+          d="M 35 65 Q 50 75 65 65"
+          className="stroke-primary stroke-4 fill-none"
+          strokeLinecap="round"
+        />
+      </motion.g>
+
+      <PointMarker x={center} y={center} />
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ type SectionProps = {
 const Section: React.FC<SectionProps> = ({ children, title, description }) => {
   const sectionId = title ? slugify(title) : undefined;
   return (
-    <section className="mt-18 bg-muted p-3 py-6 space-y-6">
+    <section className="mt-18 bg-muted p-3 py-6 space-y-12">
       <hgroup id={sectionId}>
         <a href={`#${sectionId}`} className="size-fit">
           <h2 className="w-fit font-pixel text-6xl leading-[0.8] mb-3">

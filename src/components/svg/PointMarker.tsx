@@ -45,8 +45,8 @@ const PointMarker: React.FC<UnifiedPointProps> = ({ x, y }) => {
   const baseFontSize = 14;
   const scaledFontSize = baseFontSize * inverseScale;
 
-  const roundedX = useTransform(xMv, (v) => Math.round(v * 100) / 100);
-  const roundedY = useTransform(yMv, (v) => Math.round(v * 100) / 100);
+  const roundedX = useTransform(xMv, (v) => Math.round(v));
+  const roundedY = useTransform(yMv, (v) => Math.round(v));
   const label = useMotionTemplate`${roundedX} ${roundedY}`;
 
   return (

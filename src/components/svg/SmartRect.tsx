@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'motion/react';
 import type { MotionPoint } from './types';
-import SmartPointMarker from './SmartPointMarker';
+import PointMarker from './PointMarker';
 
 interface SmartRectProps extends React.ComponentProps<typeof motion.rect> {
   x: MotionValue<number>;
@@ -32,7 +32,7 @@ const SmartRect: React.FC<SmartRectProps> = ({
       <motion.rect x={x} y={y} width={width} height={height} {...props} />
 
       {corners.map((corner, index) => (
-        <SmartPointMarker key={`corner-${index}`} x={corner.x} y={corner.y} />
+        <PointMarker key={`corner-${index}`} x={corner.x} y={corner.y} />
       ))}
     </>
   );

@@ -44,7 +44,7 @@ const PathExample = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
       <Card className="py-0 h-fit overflow-hidden">
-        <SVGDisplay height={60}>
+        <SVGDisplay height={60} defaultShowGrid>
           <SmartPath
             strokeWidth={4}
             startPoint={startPoint}

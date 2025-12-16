@@ -22,19 +22,7 @@ const PrimitivesExample = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
-        <Card className="py-0 h-fit overflow-hidden">
-          <SVGDisplay height={50}>
-            <SmartRect
-              x={x.value}
-              y={y.value}
-              width={width.value}
-              height={height.value}
-              rx={rx.value}
-              className="fill-primary"
-            />
-          </SVGDisplay>
-        </Card>
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
         <ControlPanel
           title="Parametric Shapes"
           description="In vector design, shapes aren't just drawn; they are calculated. A rectangle isn't a grid of pixels—it's a set of live properties like 'Width', 'Height', and 'Corner Radius' that remain editable forever."
@@ -49,6 +37,18 @@ const PrimitivesExample = () => {
           </div>
           <Control label="Corner Radius" control={rx} />
         </ControlPanel>
+        <Card className="py-0 h-fit overflow-hidden">
+          <SVGDisplay height={50}>
+            <SmartRect
+              x={x.value}
+              y={y.value}
+              width={width.value}
+              height={height.value}
+              rx={rx.value}
+              className="fill-primary"
+            />
+          </SVGDisplay>
+        </Card>
       </div>
     </>
   );
