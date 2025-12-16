@@ -1,9 +1,9 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { Card } from '../ui/card';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
-import SmartRect from '../svg/SmartRect';
+import { useControl } from '../ControlPanel/useControl';
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
+import { Card } from '@/components/ui/card';
+import SmartRect from '@/components/svg/SmartRect';
 
 const RECT_CONFIG = {
   x: { min: 0, initial: 30, max: 100 },

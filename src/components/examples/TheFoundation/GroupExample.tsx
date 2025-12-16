@@ -1,10 +1,9 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { Card } from '../ui/card';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
-import FaceGroup from '../svg/FaceGroup';
-
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
+import { Card } from '@/components/ui/card';
+import FaceGroup from '@/components/svg/FaceGroup';
+import { useControl } from '../ControlPanel/useControl';
 const GROUP_CONFIG = {
   rotation: { min: -180, initial: 0, max: 180 },
   scale: { min: 0.5, initial: 1, max: 2, step: 0.1 },

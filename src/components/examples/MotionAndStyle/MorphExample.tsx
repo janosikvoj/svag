@@ -1,12 +1,12 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { Card } from '../ui/card';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
-import MorphIcon from '../svg/MorphIcon';
+import { useControl } from '../ControlPanel/useControl';
+import { ControlPanel } from '../ControlPanel';
+import { Card } from '@/components/ui/card';
+import MorphShape from '@/components/svg/MorphShape';
+import { Control } from '../ControlPanel/Control';
 
 const MORPH_CONFIG = {
-  progress: { min: 0, initial: 0, max: 100, step: 1 },
+  progress: { min: 0, initial: 0.5, max: 1, step: 0.01 },
 };
 
 const MorphExample = () => {
@@ -21,8 +21,8 @@ const MorphExample = () => {
         <Control label="Morph Progress" control={progress} />
       </ControlPanel>
       <Card className="py-0 h-fit overflow-hidden">
-        <SVGDisplay height={100} defaultShowDetail={false}>
-          <MorphIcon progress={progress.value} />
+        <SVGDisplay height={50} width={50} defaultShowDetail={false}>
+          <MorphShape progress={progress.value} />
         </SVGDisplay>
       </Card>
     </div>

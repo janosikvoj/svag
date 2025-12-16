@@ -1,8 +1,9 @@
 import { slugify } from '@/lib/utils';
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Separator } from '../ui/separator';
 
 type SectionProps = {
-  children: React.ReactNode;
+  children: React.ReactNode[] | React.ReactNode;
   title: string;
   description: string;
 };
@@ -23,7 +24,12 @@ const Section: React.FC<SectionProps> = ({ children, title, description }) => {
         </a>
         {description && <p className="max-w-lg text-balance">{description}</p>}
       </hgroup>
-      {children}
+      {React.Children.map(children, (child, index) => (
+        <Fragment key={index}>
+          <Separator />
+          {child}
+        </Fragment>
+      ))}
     </section>
   );
 };

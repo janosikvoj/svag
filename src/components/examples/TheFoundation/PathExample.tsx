@@ -1,14 +1,12 @@
-// examples/PathExample.tsx
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { Card } from '../ui/card';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
-import SmartPath from '../svg/SmartPath';
-import { Switch } from '../ui/switch';
-import { Label } from '../ui/label';
 import { useState } from 'react';
 import { useTransform } from 'motion/react';
+import { useControl } from '../ControlPanel/useControl';
+import { Card } from '@/components/ui/card';
+import SmartPath from '@/components/svg/SmartPath';
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
+import { SwitchControl } from '../ControlPanel/SwitchControl';
 
 const PATH_CONFIG = {
   tension: { min: -25, initial: 10, max: 25 },
@@ -69,27 +67,17 @@ const PathExample = () => {
 
         <Control label="Control Displacement" control={controlDisplacement} />
 
-        <div className="flex gap-3 items-center">
-          <Label htmlFor="skeleton-mode" className="grow">
-            Show Skeleton
-          </Label>
-          <Switch
-            id="skeleton-mode"
-            checked={showSkeleton}
-            onCheckedChange={setShowSkeleton}
-          />
-        </div>
+        <SwitchControl
+          label="Show Skeleton"
+          checked={showSkeleton}
+          onCheckedChange={setShowSkeleton}
+        />
 
-        <div className="flex gap-3 items-center">
-          <Label htmlFor="fill-mode" className="grow">
-            Fill Shape
-          </Label>
-          <Switch
-            id="fill-mode"
-            checked={fillShape}
-            onCheckedChange={setFillShape}
-          />
-        </div>
+        <SwitchControl
+          label="Fill Shape"
+          checked={fillShape}
+          onCheckedChange={setFillShape}
+        />
       </ControlPanel>
     </div>
   );

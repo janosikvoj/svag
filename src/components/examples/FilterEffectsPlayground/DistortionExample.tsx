@@ -1,10 +1,10 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
 import { motion } from 'motion/react';
-import { Card } from '../ui/card';
-import { Control } from './ControlPanel/Control';
-import { ControlPanel } from './ControlPanel';
-import SmartPolygon from '../svg/SmartPolygon';
-import { useControl } from './ControlPanel/useControl';
+import { useControl } from '../ControlPanel/useControl';
+import { Card } from '@/components/ui/card';
+import SmartPolygon from '@/components/svg/SmartPolygon';
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
 
 const DISTORTION_CONFIG = {
   baseFrequency: { min: 0, initial: 1, max: 10, step: 0.1 },

@@ -1,16 +1,15 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { Card } from '../ui/card';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
-import { Switch } from '../ui/switch';
-import { Label } from '../ui/label';
+import { useControl } from '../ControlPanel/useControl';
+import { Card } from '@/components/ui/card';
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
 import { useId, useState } from 'react';
 import { motion } from 'motion/react';
+import { SwitchControl } from '../ControlPanel/SwitchControl';
 
 const NOISE_CONFIG = {
-  roughness: { min: 0.05, initial: 0.2, max: 0.5, step: 0.01 }, // Base Frequency
-  detail: { min: 1, initial: 1, max: 5, step: 1 }, // Octaves
+  roughness: { min: 0.05, initial: 0.2, max: 0.5, step: 0.01 },
+  detail: { min: 1, initial: 1, max: 5, step: 1 },
 };
 
 const NoiseExample = () => {
@@ -50,7 +49,6 @@ const NoiseExample = () => {
               />
 
               {/* 4. Composite: Blend Noise onto Color */}
-              {/* 'multiply' or 'overlay' logic using feComposite or feBlend */}
               <feBlend
                 in="monoNoise"
                 in2="color"
@@ -63,7 +61,6 @@ const NoiseExample = () => {
             </filter>
           </defs>
 
-          {/* The visible rect calls the filter */}
           <motion.rect
             x="10"
             y="10"
@@ -82,22 +79,12 @@ const NoiseExample = () => {
         <Control label="Roughness" control={roughness} />
         <Control label="Detail" control={detail} />
 
-        <div className="flex gap-3 items-center">
-          <Label
-            htmlFor="noise-type"
-            className="flex gap-3 items-baseline grow"
-          >
-            Mode
-            <motion.span className="text-xs text-muted-foreground font-mono">
-              {isFractal ? 'fractal' : 'turbulence'}
-            </motion.span>
-          </Label>
-          <Switch
-            id="noise-type"
-            checked={isFractal}
-            onCheckedChange={setIsFractal}
-          />
-        </div>
+        <SwitchControl
+          label="Motion Blur Mode"
+          checked={isFractal}
+          onCheckedChange={setIsFractal}
+          stateLabels={{ true: 'fractal', false: 'turbulence' }}
+        />
       </ControlPanel>
     </div>
   );

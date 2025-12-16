@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useSVGDisplay } from './SVGDisplayContext/useSVGDisplay';
 
 interface GridProps {
@@ -18,7 +18,20 @@ const Grid: React.FC<GridProps> = ({ width, height, strokeWidth = 0.5 }) => {
   const inverseScale = 1 / scaleFactor;
 
   // Base font size in viewBox units (you can adjust this)
-  const baseFontSize = 14;
+  const [baseFontSize, setBaseFontSize] = useState(14);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Use 10px on screens smaller than 768px (standard mobile breakpoint)
+      setBaseFontSize(window.innerWidth < 768 ? 10 : 14);
+    };
+
+    // Initial check
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Scaled font size to match rem-like behavior
   const scaledFontSize = baseFontSize * inverseScale;

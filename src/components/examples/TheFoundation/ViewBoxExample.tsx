@@ -1,13 +1,12 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { motion, useMotionTemplate, useMotionValueEvent } from 'motion/react';
-import { Label } from '@/components/ui/label';
+import { useMotionTemplate, useMotionValueEvent } from 'motion/react';
 import Polygon from '@/components/svg/SmartPolygon';
-import { Card } from '../ui/card';
+import { Card } from '../../ui/card';
 import { useState } from 'react';
-import { Switch } from '../ui/switch';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
+import { useControl } from '../ControlPanel/useControl';
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
+import { SwitchControl } from '../ControlPanel/SwitchControl';
 
 const VIEWBOX_CONFIG = {
   width: { min: 50, initial: 100, max: 150 },
@@ -62,22 +61,12 @@ const ViewBoxExample = () => {
         <Control label="View Box Width" control={viewBoxWidth} />
         <Control label="View Box Height" control={viewBoxHeight} />
 
-        <div className="flex gap-3 items-center">
-          <Switch
-            id="overflow-mode"
-            checked={overflowVisible}
-            onCheckedChange={setOverflowVisible}
-          />
-          <Label
-            htmlFor="overflow-mode"
-            className="flex gap-3 items-baseline grow"
-          >
-            Overflow
-            <motion.span className="text-xs text-muted-foreground font-mono">
-              {overflowVisible ? 'visible' : 'hidden'}
-            </motion.span>
-          </Label>
-        </div>
+        <SwitchControl
+          label="Overflow"
+          checked={overflowVisible}
+          onCheckedChange={setOverflowVisible}
+          stateLabels={{ true: 'visible', false: 'hidden' }}
+        />
       </ControlPanel>
     </div>
   );

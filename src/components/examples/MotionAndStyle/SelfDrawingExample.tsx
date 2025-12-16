@@ -1,16 +1,15 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { Card } from '../ui/card';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
-import { Switch } from '../ui/switch';
-import { Label } from '../ui/label';
 import { useState } from 'react';
-import SelfDrawingPath from '../svg/SelfDrawingPath';
+import { useControl } from '../ControlPanel/useControl';
+import { Card } from '@/components/ui/card';
+import SelfDrawingPath from '@/components/svg/SelfDrawingPath';
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
+import { SwitchControl } from '../ControlPanel/SwitchControl';
 
 const DRAW_CONFIG = {
-  progress: { min: 0, initial: 1, max: 1, step: 0.01 }, // 0 to 100%
-  weight: { min: 1, initial: 4, max: 20 },
+  progress: { min: 0, initial: 0.5, max: 1, step: 0.01 },
+  weight: { min: 0.1, initial: 2, max: 6, step: 0.1 },
 };
 
 const SelfDrawingExample = () => {
@@ -21,7 +20,7 @@ const SelfDrawingExample = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
       <Card className="py-0 h-fit overflow-hidden">
-        <SVGDisplay width={150} height={80} defaultShowDetail={false}>
+        <SVGDisplay height={50} defaultShowDetail={false}>
           <SelfDrawingPath
             progress={progress.value}
             strokeWidth={weight.value}
@@ -37,16 +36,11 @@ const SelfDrawingExample = () => {
         <Control label="Draw Progress" control={progress} />
         <Control label="Line Weight" control={weight} />
 
-        <div className="flex gap-3 items-center">
-          <Label htmlFor="caps-mode" className="grow">
-            Round Caps
-          </Label>
-          <Switch
-            id="caps-mode"
-            checked={roundCaps}
-            onCheckedChange={setRoundCaps}
-          />
-        </div>
+        <SwitchControl
+          label="Round Caps"
+          checked={roundCaps}
+          onCheckedChange={setRoundCaps}
+        />
       </ControlPanel>
     </div>
   );

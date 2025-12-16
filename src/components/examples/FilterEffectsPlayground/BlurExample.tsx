@@ -1,12 +1,11 @@
 import SVGDisplay from '@/components/svg/SVGDisplay';
-import { Card } from '../ui/card';
-import { useControl } from './ControlPanel/useControl';
-import { ControlPanel } from './ControlPanel';
-import { Control } from './ControlPanel/Control';
-import { Switch } from '../ui/switch';
-import { Label } from '../ui/label';
 import { useId, useState } from 'react';
 import { motion, useTransform } from 'motion/react';
+import { useControl } from '../ControlPanel/useControl';
+import { ControlPanel } from '../ControlPanel';
+import { Control } from '../ControlPanel/Control';
+import { SwitchControl } from '../ControlPanel/SwitchControl';
+import { Card } from '@/components/ui/card';
 
 const BLUR_CONFIG = {
   amount: { min: 0, initial: 5, max: 20, step: 0.5 },
@@ -32,16 +31,11 @@ const BlurExample = () => {
         <Control label="Blur Amount" control={blurAmount} />
         <Control label="Opacity" control={opacity} />
 
-        <div className="flex gap-3 items-center">
-          <Label className="grow" htmlFor="motion-blur">
-            Motion Blur Mode
-          </Label>
-          <Switch
-            id="motion-blur"
-            checked={motionBlurMode}
-            onCheckedChange={setMotionBlurMode}
-          />
-        </div>
+        <SwitchControl
+          label="Motion Blur Mode"
+          checked={motionBlurMode}
+          onCheckedChange={setMotionBlurMode}
+        />
       </ControlPanel>
 
       <Card className="py-0 h-fit overflow-hidden">
